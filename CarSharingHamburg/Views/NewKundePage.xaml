@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CarSharingHamburg.ViewModels"
+             xmlns:models="clr-namespace:CarSharingHamburg.Models"
+             x:Class="CarSharingHamburg.Views.NewKundePage"
+             x:DataType="viewModels:NewKundeViewModel"
+             Title="NewKundePage">
+
+
+    <Grid RowDefinitions="*,auto" Padding="10">
+        <ScrollView>
+            <Grid RowDefinitions="auto,auto,auto,auto,auto,auto" ColumnDefinitions="*,2*">
+
+                <Label Text="Vorname: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+                <Entry Grid.Column="1"
+                       Text="{Binding Kunde.Vorname}"
+                       Placeholder="Vorname"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                        TextChanged="Entry_TextChanged"
+                       x:Name="TxtFirstName"/>
+
+                <Label Grid.Row="1"
+                       Text="Nachname: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+                <Entry Grid.Row="1"
+                       Grid.Column="1"
+                       Text="{Binding Kunde.Nachname}"
+                       Placeholder="Nachname"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                        TextChanged="Entry_TextChanged"
+                       x:Name="TxtLastName"/>
+
+                <Label Grid.Row="2"
+                       Text="E-Mail: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+                <Entry Grid.Row="2"
+                       Grid.Column="1"
+                       Text="{Binding Kunde.EMail}"
+                       Keyboard="Email"
+                       Placeholder="name@example.de"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                        TextChanged="Entry_TextChanged"
+                       x:Name="TxtEMail"/>
+
+                <Label Grid.Row="3"
+                       Text="PLZ: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+                <Entry Grid.Row="3"
+                       Grid.Column="1"
+                       Text="{Binding Kunde.PLZ}"
+                       Keyboard="Numeric"
+                       Placeholder="PLZ"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                        TextChanged="Entry_TextChanged"
+                       x:Name="TxtPLZ"/>
+
+                <Label Grid.Row="4"
+                       Text="Ort: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+                <Entry Grid.Row="4"
+                       Grid.Column="1"
+                       Text="{Binding Kunde.Ort}"
+                       Placeholder="Ort"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                        TextChanged="Entry_TextChanged"
+                       x:Name="TxtOrt"/>
+
+                <Label Grid.Row="5"
+                       Text="Straße: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+                <Entry Grid.Row="5"
+                       Grid.Column="1"
+                       Text="{Binding Kunde.Strasse}"
+                       Placeholder="Straße"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"  
+                        TextChanged="Entry_TextChanged"
+                       x:Name="TxtStrasse"/>
+
+
+            </Grid>
+        </ScrollView>
+        <Button x:Name="BttnOk" IsEnabled="False" Grid.Row="1" Text="Ok" HorizontalOptions="Fill" VerticalOptions="Center" FontSize="Medium" Command="{Binding AddCommand}"/>
+    </Grid>
+</ContentPage>

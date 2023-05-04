@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CarSharingHamburg.ViewModels"
+             xmlns:models="clr-namespace:CarSharingHamburg.Models"
+             x:Class="CarSharingHamburg.Views.AutoPage"
+             x:DataType="viewModels:AutoViewModel"
+             Title="AutoPage">
+
+    <Grid RowDefinitions="*,auto"   >
+
+
+
+        <ScrollView  Grid.ColumnSpan="4">
+            <RefreshView Command="{Binding LoadAutosCommand}" IsRefreshing="{Binding IsBusy}">
+
+                <CollectionView x:Name="collectionView" ItemsSource="{Binding Autos}"  SelectedItem="{Binding SelectedAuto}" SelectionMode="Single">
+                    <CollectionView.ItemTemplate >
+                        <DataTemplate x:DataType="models:Auto">
+                            <Label FontSize="Large" Margin="10">
+                                <Label.Text>
+                                    <MultiBinding  StringFormat="{}{0} - {1}">
+                                        <Binding Path="Kennzeichen" />
+                                        <Binding Path="Modell"/>
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </ScrollView>
+
+        <Button Grid.Row="1"
+                Grid.ColumnSpan="2"
+                CornerRadius="0"
+                Text="Neu"
+                FontSize="Medium"
+                Command="{Binding AddAutoCommand}"/>
+    </Grid>
+</ContentPage>

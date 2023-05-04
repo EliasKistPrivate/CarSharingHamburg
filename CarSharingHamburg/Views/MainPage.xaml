@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="CarSharingHamburg.Views.MainPage"
+             xmlns:viewModels="clr-namespace:CarSharingHamburg.ViewModels"
+             x:DataType="viewModels:MainPageViewModel"
+             Title="Carsharing Hamburg"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials">
+
+    <Grid RowDefinitions="*,auto">
+        <ScrollView VerticalScrollBarVisibility="Never" >
+            <Grid  RowDefinitions="auto,auto,auto,auto,auto,20" RowSpacing="10" Padding="10">
+
+                <Border Grid.Row="0" StrokeShape="RoundRectangle 10,10,10,10"  BackgroundColor="{StaticResource Secondary}" >
+
+                    <Grid  RowDefinitions="auto,auto" ColumnDefinitions="*,3*" Margin="10"  >
+                        <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="Kunde: " FontSize="Medium" TextColor="Black"/>
+                        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" FontSize="Medium" HorizontalOptions="Center">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Kunde.Vorname"/>
+                                    <Binding Path="Kunde.Nachname"/>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <Button Grid.Row="1"  Grid.ColumnSpan="4" Margin="10" Text="Kunde wählen" FontSize="Medium" Command="{Binding NavigateToKunde}"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" StrokeShape="RoundRectangle 10,10,10,10"  BackgroundColor="{StaticResource Secondary}" >
+                    <Grid  RowDefinitions="auto,auto,auto,auto,auto" ColumnDefinitions="*,3*" Margin="10">
+
+                        <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="Auto: "  FontSize="Medium" TextColor="Black"/>
+                        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" FontSize="Medium" HorizontalOptions="Center">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}&#x0a;{1}">
+                                    <Binding Path="Auto.Kennzeichen"/>
+                                    <Binding Path="Auto.Modell"/>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+
+                        <Button Grid.Row="1"  Grid.ColumnSpan="3" Margin="10" Text="Auto wählen" FontSize="Medium" Command="{Binding NavigateToAuto}"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="Standort: "  FontSize="Medium" TextColor="Black"/>
+
+                        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" FontSize="Medium" HorizontalOptions="Center">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0}&#x0a;{1} {2}">
+                                    <Binding Path="Auto.Strasse"/>
+                                    <Binding Path="Auto.PLZ"/>
+                                    <Binding Path="Auto.Ort"/>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+
+                        <Button  Grid.Row="3"  Grid.ColumnSpan="3" Margin="10" Text="Standort zeigen" FontSize="Medium" IsEnabled="{Binding ValidAuto}" Clicked="BttnShowLocation_Clicked"/>
+
+                        <Border Grid.Row="4" Grid.ColumnSpan="2" StrokeShape="RoundRectangle 20,20,20,20"  BackgroundColor="{StaticResource Secondary}" >
+                            <maps:Map   IsTrafficEnabled="True" IsShowingUser="True" MapType="Hybrid" Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="200" x:Name="map"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="2" StrokeShape="RoundRectangle 10,10,10,10"  BackgroundColor="{StaticResource Secondary}" >
+                    <Grid  RowDefinitions="auto,auto" ColumnDefinitions="1*,2*,1*" Margin="10" >
+
+                        <Label Grid.Row="0" Grid.Column="0"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="von" FontSize="Medium"/>
+                        <DatePicker Grid.Row="0" Grid.Column="1" Margin="10" FontSize="Medium" HorizontalOptions="Center" Date="{Binding FromDate}"/>
+                        <TimePicker Grid.Column="2" Margin="10" FontSize="Medium" HorizontalOptions="Center" Time="{Binding FromTime}" />
+
+                        <Label Grid.Row="1" Grid.Column="0"   VerticalTextAlignment="Center"  HorizontalTextAlignment="Center" Text="bis" FontSize="Medium"/>
+                        <DatePicker Grid.Row="1" Grid.Column="1"  Margin="10" FontSize="Medium" HorizontalOptions="Center" Date="{Binding ToDate}"/>
+                        <TimePicker Grid.Row="1" Grid.Column="2"  Margin="10" FontSize="Medium" HorizontalOptions="Center" Time="{Binding ToTime}"/>
+
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="3" StrokeShape="RoundRectangle 10,10,10,10"  BackgroundColor="{StaticResource Secondary}" >
+                    <Grid RowDefinitions="auto" ColumnDefinitions="auto,*,*,auto,*" Margin="10">
+                        <Label Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="Stunden: " FontSize="Medium"/>
+                        <Entry Keyboard="Numeric" Grid.Column="1" IsEnabled="False" FontSize="Medium" Text="{Binding FromToTime}" />
+                        <Label Grid.Column="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="Kilometer: " FontSize="Medium"/>
+                        <Entry  Keyboard="Numeric" Grid.Column="4" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" Text="{Binding Kilometers}"/>
+                    </Grid>
+                </Border>
+
+
+
+
+                <Button Grid.Row="4" Text="Ok" HorizontalOptions="Fill"  VerticalOptions="End" IsEnabled="{Binding ValidInput}" Command="{Binding CalculateRentCommand}"/>
+
+            </Grid>
+        </ScrollView>
+        <StackLayout  Grid.Row="1" >
+            <Grid RowDefinitions="auto" ColumnSpacing="2" ColumnDefinitions="auto,*,auto" BackgroundColor="{StaticResource Primary}" Padding="10">
+                <Button Text="i" FontSize="Medium" FontAttributes="Bold" BackgroundColor="{StaticResource Secondary}" TextColor="{StaticResource Primary}" CornerRadius="50" Clicked="Button_Clicked"/>
+                <Label Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="Carsharing kosten: " TextColor="White" FontSize="Medium"/>
+                <Label Grid.Column="2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" TextColor="White" Text="{Binding Miete, StringFormat='{}{0:c}'}"></Label>
+            </Grid>
+        </StackLayout>
+    </Grid>
+</ContentPage>

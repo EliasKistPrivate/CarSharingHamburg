@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:CarSharingHamburg.ViewModels"
+             x:Class="CarSharingHamburg.Views.AutoDetailsPage"
+             x:DataType="viewModels:AutoDetailsViewModel"
+             Title="AutoDetailsPage">
+
+    <Grid RowDefinitions="*,auto,auto,auto,auto" Padding="0">
+        <Grid RowDefinitions="auto,auto,auto,auto,auto,auto" ColumnDefinitions="*,2*" Padding="10">
+
+            <Label Text="Kennzeichen: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+            <Entry Grid.Column="1"
+                       Text="{Binding Auto.Kennzeichen}"
+                       Placeholder="XX-XX-0000"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                       TextChanged="Entry_TextChanged"
+                       x:Name="TxtKennzeichen"
+                       IsEnabled="False"/>
+
+            <Label Grid.Row="1"
+                       Text="Modell: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+            <Entry Grid.Row="1"
+                       Grid.Column="1"
+                       Text="{Binding Auto.Modell}"
+                       Placeholder="Modell"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                       TextChanged="Entry_TextChanged"
+                       x:Name="TxtModell"
+                       IsEnabled="False"/>
+
+            <Label Grid.Row="2"
+                       Text="Fahrzeugtyp: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+
+
+            <Picker Grid.Row="2" Grid.Column="1"
+                    x:Name="PickerFahrzeugtyp"
+                    IsEnabled="False"
+                    Title="Fahrzeugtyp" 
+                    FontSize="Medium"
+                    SelectedItem="{Binding SelectedFahrzeugtyp}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Kleinwagen</x:String>
+                        <x:String>Limousine</x:String>
+                        <x:String>Kombi</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Label Grid.Row="3"
+                       Text="PLZ: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+            <Entry Grid.Row="3"
+                       Grid.Column="1"
+                       Text="{Binding Auto.PLZ}"
+                       Keyboard="Numeric"
+                       Placeholder="PLZ"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                       TextChanged="Entry_TextChanged"
+                       x:Name="TxtPLZ"
+                       IsEnabled="False"/>
+
+            <Label Grid.Row="4"
+                       Text="Ort: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+            <Entry Grid.Row="4"
+                       Grid.Column="1"
+                       Text="{Binding Auto.Ort}"
+                       Placeholder="Ort"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                        TextChanged="Entry_TextChanged"
+                       x:Name="TxtOrt"
+                       IsEnabled="False"/>
+
+            <Label Grid.Row="5"
+                       Text="Straße: "
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"/>
+
+            <Entry Grid.Row="5"
+                       Grid.Column="1"
+                       Text="{Binding Auto.Strasse}"
+                       Placeholder="Straße"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"  
+                        TextChanged="Entry_TextChanged"
+                       x:Name="TxtStrasse"
+                       IsEnabled="False"/>
+
+
+        </Grid>
+        <Button x:Name="BttnDelete" Grid.Row="1"  Text="Löschen" FontSize="Medium" Command="{Binding DeleteAutoCommand}" Margin="0" CornerRadius="0"></Button>
+        <Button x:Name="BttnEdit" Grid.Row="2"  Text="Ändern" FontSize="Medium" Clicked="BttnChangeClicked" Margin="0" CornerRadius="0"></Button>
+
+        <Button x:Name="BttnSubmit" Grid.Row="3" Text="Wählen" FontSize="Medium" Command="{Binding SubmitCommand}" Margin="0" CornerRadius="0"></Button>
+        <Button x:Name="BttnCancel" Grid.Row="4" Text="Abbrechen" FontSize="Medium" Command="{Binding CancelCommand}" Margin="0" CornerRadius="0"></Button>
+
+        <Button x:Name="BttnSaveChanges" Grid.Row="4" IsVisible="False"  Text="Speichern" FontSize="Medium" Clicked="BttnSaveClicked" Command="{Binding EditAutoCommand}" Margin="0" CornerRadius="0"></Button>
+
+    </Grid>
+</ContentPage>

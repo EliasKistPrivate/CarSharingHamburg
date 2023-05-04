@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="CarSharingHamburg.AppShellWindows"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CarSharingHamburg"
+    xmlns:views="clr-namespace:CarSharingHamburg.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:MainPageWindows}"
+        Route="MainPage" />
+
+    <!--<ShellContent
+        Title="Kunden"
+        ContentTemplate="{DataTemplate views:}"
+        Route="KundenPage"/>
+
+    <ShellContent
+        Title="Neuer Kunde"
+        ContentTemplate="{DataTemplate views:NewKundePage}"
+        Route="NewKundePage"/>-->
+
+</Shell>
