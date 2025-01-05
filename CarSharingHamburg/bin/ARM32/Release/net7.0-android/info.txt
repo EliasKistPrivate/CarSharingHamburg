@@ -1,4 +1,0 @@
-- Es kann sein, dass die App beim ersten Start abstürzt 
-- Da das erstellen der APK unter Visual Studio relativ komplex ist, kann es sein, dass die apk nicht installiert werden kann. Ich konnte es leider nur auf einem Smartphone testen.
-
-- in der Google Maps ansicht, kann man auf den roten Pin klicken und wird zur installiertern Maps-App weitergeleitet (Wenn Internet und Standort an sind)
